@@ -1,7 +1,14 @@
 "use strict";
-let my_name = "Lun";
-console.log(my_name);
-let first_name = "Hsu";
-console.log(first_name);
-let last_name = "Johm";
-console.log(last_name);
+let today = new Date();
+let hourNow = today.getHours();
+let greeting;
+if (hourNow > 18) {
+    greeting = 'Good evening!!!';
+}
+else if (hourNow > 12) {
+    greeting = 'Good afternoon!!!';
+}
+else if (hourNow > 0) {
+    greeting = 'Good morning!!!';
+}
+document.write('<h3>' + greeting + '</h3>');
