@@ -1,6 +1,8 @@
 let sarea_array = []
 let sareaElement = document.getElementById("sarea");
 
+//select裡面的option被運用 當區域被選擇的時候 
+//顯示資料有沒有在列表裡 如果有顯示"有這個區域"
 sareaElement.addEventListener("change", (event) => {
     let selectedIndex = sareaElement.selectedIndex;
     selectedValue = sareaElement.options[selectedIndex].value;
@@ -9,6 +11,7 @@ sareaElement.addEventListener("change", (event) => {
     }
 })
 
+//把讀取的資料整理並存入到html select裡
 function reqListener() {
     let youbikedata = JSON.parse(this.responseText);
     
@@ -28,7 +31,7 @@ function reqListener() {
         sareaElement.appendChild(optionElement);
     }
 }
-
+//建立XMLHttpRequest 下載資料load後執行reqListener
 const windowload = (event) => {
     console.log('page loaded')
     const req = new XMLHttpRequest();
@@ -37,5 +40,5 @@ const windowload = (event) => {
     req.send();
 }
 
-//
+//網頁load後執行windowload
 window.addEventListener('load', windowload)
