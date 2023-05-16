@@ -1,9 +1,20 @@
+let sareaElement = document.getElementById("sarea");
+
 function reqListener() {
     let youbikedata = JSON.parse(this.responseText);
-    for(const youbike of youbikedata){
-    console.log(youbike.sna);
-  }
+    let sarea_array = []
+    for (const youbike of youbikedata) {
+        sarea_array.push(youbike.sarea);
+    }
+    sarea_array = [...new Set(sarea_array)]//Set功能不會重複加入資料
+    console.log(sarea_array)//print 資料到主控台  
+    for (const area of sarea_array) {
+        let optionElement = document.createElement("option");
+        optionElement.textContent = area;
+        sareaElement.appendChild(optionElement);
+    }
 }
+
 const windowload = (event) => {
     console.log('page loaded')
     const req = new XMLHttpRequest();
@@ -13,4 +24,4 @@ const windowload = (event) => {
 }
 
 //
-window.addEventListener('load',windowload)
+window.addEventListener('load', windowload)
