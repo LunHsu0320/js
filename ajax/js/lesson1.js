@@ -1,8 +1,9 @@
 function reqListener() {
     let youbikedata = JSON.parse(this.responseText);
-    console.log(youbikedata);
+    for(const youbike of youbikedata){
+    console.log(youbike.sna);
   }
-  
+}
 const windowload = (event) => {
     console.log('page loaded')
     const req = new XMLHttpRequest();
