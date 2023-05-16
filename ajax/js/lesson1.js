@@ -7,7 +7,12 @@ function reqListener() {
         sarea_array.push(youbike.sarea);
     }
     sarea_array = [...new Set(sarea_array)]//Set功能不會重複加入資料
-    console.log(sarea_array)//print 資料到主控台  
+    console.log(sarea_array)//print 資料到主控台 
+    let optionElement = document.createElement("option");
+    optionElement.textContent = '請選擇行政區'
+    sareaElement.appendChild(optionElement);
+ 
+    //將讀取到的區名加入到select中    
     for (const area of sarea_array) {
         let optionElement = document.createElement("option");
         optionElement.textContent = area;
