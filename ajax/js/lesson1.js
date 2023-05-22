@@ -4,6 +4,8 @@ let areaNameElement = document.getElementById('areaName')
 let tbodyElement = document.getElementById('tbody')
 let youbikedata
 let dialogElement = document.getElementById("dialog")
+let mapElement = document.getElementById("map")
+let exitElement = document.getElementById("exit")
 
 //select裡面的option被運用 當區域被選擇的時候 
 //顯示資料有沒有在列表裡 如果有顯示"有這個區域"
@@ -40,14 +42,23 @@ sareaElement.addEventListener("change", (event) => {
         //取得所有a元素
         //a元素加入click事件
         //取出a元素的data-sno的屬性值
+        //跳出<div class="map">對話欄
         let aElements = document.querySelectorAll('.map')
         aElements.forEach((element) => {
-            
-            element.addEventListener('click',(event)=>{
+
+            element.addEventListener('click', (event) => {
                 event.preventDefault()
-            let aElement = event.currentTarget
-            console.log(aElement.dataset.sno)
-        })
+                let aElement = event.currentTarget
+                console.log(aElement.dataset.sno)
+                // mapElement.className = 'overlay'
+                youbikedata.forEach(site=>{
+                    if(site.sno == aElement.dataset.sno){
+                        console.log(site.lat)
+                        console.log(site.lng)
+                        open(`https://www.google.com/maps/place/${site.lat}+${site.lng}`)
+                    }
+                })
+            })
         })
     }
 })
@@ -73,7 +84,7 @@ function reqListener() {
         sareaElement.appendChild(optionElement);
     }
 }
-
+//監聽下載完成的http status
 function reqreadstate() {
     if (this.readyState == 4) {
         if (this.status != 200) {
@@ -97,3 +108,8 @@ const windowload = (event) => {
 //網頁load後執行windowload
 window.addEventListener('load', windowload)
 // window.addEventListener("error",reqError);
+
+//map內的離開的的Click事件
+exitElement.addEventListener('click',(event)=>{
+    mapElement.className = 'close'
+})
