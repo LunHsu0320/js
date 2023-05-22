@@ -3,6 +3,7 @@ let sareaElement = document.getElementById("sarea");
 let areaNameElement = document.getElementById('areaName')
 let tbodyElement = document.getElementById('tbody')
 let youbikedata
+let dialogElement =document.getElementById("dialog")
 
 //select裡面的option被運用 當區域被選擇的時候 
 //顯示資料有沒有在列表裡 如果有顯示"有這個區域"
@@ -40,11 +41,6 @@ sareaElement.addEventListener("change", (event) => {
 
 //把讀取的資料整理並存入到html select裡
 function reqListener() {
-    console.log(this.status)
-    if(this.status!=200){
-        console.log("網頁維護中")
-        return
-    }
     youbikedata = JSON.parse(this.responseText);
 
     for (const youbike of youbikedata) {
@@ -65,8 +61,14 @@ function reqListener() {
     }
 }
 
-function reqError(){
-    console.log("網頁維護中")
+function reqreadstate(){
+    if(this.readyState== 4){
+        if(this.state!=200){
+            dialogElement.show()
+        }
+    }
+
+    
 }
 
 //建立XMLHttpRequest 下載資料load後執行reqListener
@@ -74,7 +76,7 @@ const windowload = (event) => {
     console.log('page loaded')
     const req = new XMLHttpRequest();
     req.addEventListener("load", reqListener);
-    req.addEventListener("error",reqError);//偵測錯誤
+    req.addEventListener("readystatechange",reqreadstate);//當偵測到錯誤執行後面的程式
     req.open("GET", "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate123456.json");
     req.send();
 }
