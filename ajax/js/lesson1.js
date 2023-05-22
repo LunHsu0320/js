@@ -77,7 +77,7 @@ const windowload = (event) => {
     const req = new XMLHttpRequest();
     req.addEventListener("load", reqListener);
     req.addEventListener("readystatechange",reqreadstate);//當偵測到錯誤執行後面的程式
-    req.open("GET", "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate123456.json");
+    req.open("GET", "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json");
     req.send();
 }
 
