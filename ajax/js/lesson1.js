@@ -3,7 +3,7 @@ let sareaElement = document.getElementById("sarea");
 let areaNameElement = document.getElementById('areaName')
 let tbodyElement = document.getElementById('tbody')
 let youbikedata
-let dialogElement =document.getElementById("dialog")
+let dialogElement = document.getElementById("dialog")
 
 //select裡面的option被運用 當區域被選擇的時候 
 //顯示資料有沒有在列表裡 如果有顯示"有這個區域"
@@ -26,17 +26,29 @@ sareaElement.addEventListener("change", (event) => {
                 trHTML += "<td>" + element.sna.slice(11) + "</td>"
                 //slice()可以複製開始與結束點（結束點不算）中的內容
                 trHTML += "<td>" + element.ar + "</td>"
-                trHTML += "<td>" + element.tot + "</td>"                
+                trHTML += "<td>" + element.tot + "</td>"
                 trHTML += "<td>" + element.sbi + "</td>"
                 trHTML += "<td>" + element.bemp + "</td>"
                 trHTML += "<td>" + element.updateTime + "</td>"
                 trHTML += "<td>" + status + "</td>"
-                trHTML += `<td><a href='#' data-sno=${element.sno}>更多</a></td>`
+                trHTML += `<td><a class="map" href="#" data-sno=${element.sno}>更多</a></td>`
                 trHTML += "</tr>"
             }
 
         });
         tbodyElement.innerHTML = trHTML
+        //取得所有a元素
+        //a元素加入click事件
+        //取出a元素的data-sno的屬性值
+        let aElements = document.querySelectorAll('.map')
+        aElements.forEach((element) => {
+            
+            element.addEventListener('click',(event)=>{
+                event.preventDefault()
+            let aElement = event.currentTarget
+            console.log(aElement.dataset.sno)
+        })
+        })
     }
 })
 
@@ -62,14 +74,14 @@ function reqListener() {
     }
 }
 
-function reqreadstate(){
-    if(this.readyState== 4){
-        if(this.status!=200){
+function reqreadstate() {
+    if (this.readyState == 4) {
+        if (this.status != 200) {
             dialogElement.show()
         }
     }
 
-    
+
 }
 
 //建立XMLHttpRequest 下載資料load後執行reqListener
@@ -77,7 +89,7 @@ const windowload = (event) => {
     console.log('page loaded')
     const req = new XMLHttpRequest();
     req.addEventListener("load", reqListener);
-    req.addEventListener("readystatechange",reqreadstate);//當偵測到錯誤執行後面的程式
+    req.addEventListener("readystatechange", reqreadstate);//當偵測到錯誤執行後面的程式
     req.open("GET", "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json");
     req.send();
 }
