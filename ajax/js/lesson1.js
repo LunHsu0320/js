@@ -6,12 +6,15 @@ let youbikedata
 let dialogElement = document.getElementById("dialog")
 let mapElement = document.getElementById("map")
 let exitElement = document.getElementById("exit")
-
+let inlineMapElement = document.querySelector('#inlineMap')
+//下拉式選單
 //select裡面的option被運用 當區域被選擇的時候 
 //顯示資料有沒有在列表裡 如果有顯示"有這個區域"
 sareaElement.addEventListener("change", (event) => {
     let selectedIndex = sareaElement.selectedIndex;
+    console.log("selectedIndex:"+ selectedIndex)
     selectedValue = sareaElement.options[selectedIndex].value;
+    console.log("selectedValue:"+ selectedValue)
     if (sarea_array.includes(selectedValue)) {
         console.log('有這個區域')
         console.log(`行政區:${selectedValue}`)
@@ -50,12 +53,25 @@ sareaElement.addEventListener("change", (event) => {
                 event.preventDefault()
                 let aElement = event.currentTarget
                 console.log(aElement.dataset.sno)
-                // mapElement.className = 'overlay'
+                mapElement.className = 'overlay'
                 youbikedata.forEach(site=>{
                     if(site.sno == aElement.dataset.sno){
-                        console.log(site.lat)
-                        console.log(site.lng)
-                        open(`https://www.google.com/maps/place/${site.lat}+${site.lng}`)
+                        // console.log(site.lat)
+                        // console.log(site.lng)
+                        // open(`https://www.google.com/maps/place/${site.lat}+${site.lng}`)
+                        let zoom = 18; // 0 - 18
+                        let center = [site.lat, site.lng]; // 中心點座標
+                        let map = L.map('showMap').setView(center, zoom);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap', // 商用時必須要有版權出處
+                        zoomControl: true , // 是否秀出 - + 按鈕
+                        }).addTo(map); 
+                        let marker = L.marker(center,{
+                            title:'站點名稱',
+                            opacity:1.0
+                        }).addTo(map)
+                        // inlineMapElement.src = "https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik"
+                        // inlineMapElement.src = `https://www.google.com/maps/place/${site.lat}+${site.lng}`
                     }
                 })
             })

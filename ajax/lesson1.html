@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lesson1</title>
     <link rel="stylesheet" href="css/index.css">
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
 </head>
+
 <body>
     <form method="post">
         <fieldset>
@@ -23,7 +25,7 @@
             <tr>
                 <th>站點名稱</th>
                 <th>地址</th>
-                <th>車輛數</th>                
+                <th>車輛數</th>
                 <th>可借</th>
                 <th>可還</th>
                 <th>時間</th>
@@ -47,16 +49,19 @@
     <dialog id="dialog">
         <p>網頁維護中</p>
         <form method="dialog">
-          <button>OK</button>
+            <button>OK</button>
         </form>
-      </dialog>
+    </dialog>
 
-      <div class="close" id="map">
+    <div class="close" id="map">
         <div id="showMap"></div>
+        <iframe id="inlineMap" title="map" width="300" height="200"></iframe>
         <input type="button" value="離開" id="exit">
-      </div>
-      
-    <script src="js/lesson1.js"></script>
+    </div>
     
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
+    <script src="js/lesson1.js"></script>
+
 </body>
+
 </html>
