@@ -62,6 +62,16 @@
     align-items: center;
     grid-area: footer;
 }
+
+form .nameAlert{
+    font-size: smaller;
+    color: red;
+}
+
+form .close{
+    display: none;
+}
+
 /* 手機橫式 */
 @media (min-width: 576px) {
 
