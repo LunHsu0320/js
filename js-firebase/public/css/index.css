@@ -1,12 +1,28 @@
+#container{
+    display:grid ;
+    grid-template-columns: 200px 500px;
+    grid-template-rows: 100px 500px 100px;
+
+}
 .header{
     background-color: antiquewhite;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;    
 }
 .nav{
     background-color:aqua;
+    grid-row: 2/3;
+    grid-column: 1/2;    
 }
 .main{
     background-color: aquamarine;
+    grid-row: 2/span 1;
+    grid-column: 2/span 2;    
 }
 .footer{
     background-color: bisque;
+    grid-row: 3/span 1;
+    grid-column: 1/4;
 }
