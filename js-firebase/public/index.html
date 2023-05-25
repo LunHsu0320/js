@@ -7,13 +7,43 @@
   <title>js-firebase-pd</title>
   <link rel="stylesheet" href="css/index.css">
   <script src="js/index.js" type="module"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
   <div id="container">
-    <header class="header">header</header>
-    <nav class="nav">navigation</nav>
-    <main class="main">Main</main>
-    <footer class="footer">footer</footer>
+    <header class="header">
+      <h1>產品輸入</h1>
+    </header>
+    <nav class="nav">
+      <ul>
+        <li><a href="#">產品輸入</a></li>
+        <li><a href="#">產品更新</a></li>
+        <li><a href="#">產品導覽</a></li>
+      </ul>
+
+    </nav>
+    <main class="main">
+      <form>
+        <div class="mb-3">
+          <label for="inputName" class="form-label">產品名稱</label>
+          <input type="text" class="form-control" id="inputName" aria-describedby="nameHelp">
+          <div id="nameHelp" class="form-text">產品名稱要詳細</div>
+        </div>
+        <div class="mb-3">
+          <label for="inputCode1" class="form-label">產品編號</label>
+          <input type="text" class="form-control" id="inputCode1" aria-describedby="codeHelp">
+          <div id="codeHelp" class="form-text">xxx-xxx-xxx</div>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="warrantyCheck1">
+          <label class="form-check-label" for="warrantyCheck1">保固</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </main>
+    <footer class="footer">
+      <h1>footer</h1>
+    </footer>
   </div>
   
 </body>
