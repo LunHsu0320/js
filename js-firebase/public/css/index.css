@@ -63,7 +63,7 @@
     grid-area: footer;
 }
 
-form .nameAlert{
+form .alert{
     font-size: smaller;
     color: red;
 }
