@@ -58,15 +58,32 @@ const warrantyCheck = ()=>{
     }
 }
 
-const warrantyDateInput=()=>{
-    let warrantyDateInput = document.getElementById('warrantyDate');
-    let warrantyDateValue = warrantyDateInput.value;    
-    console.log('選取的日期:', warrantyDateValue);
-    allOfDataArray.push({'選取的日期:': warrantyDateValue})
+// const warrantyDateInput=()=>{
+//     let warrantyDateInput = document.getElementById('warrantyDate');
+//     let currentDate = new Date();
+//     let currentDateISO = currentDate.toISOString().split('T')[0];
+//     warrantyDateInput.value = currentDateISO;
+//     let warrantyDateValue = warrantyDateInput.value;    
+//     console.log('選取的日期:', warrantyDateValue);
+//     allOfDataArray.push({'選取的日期:': warrantyDateValue})
+// }
+// warrantyDateInput()
+
+const warrantyDateInputv2=()=>{
+    
+    let current = new Date();
+    let year = current.getFullYear()
+    let month = current.getMonth()+1
+    let day = current.getDate()
+    
+    let month_string = String(month).padStart(2,"0")
+    let day_string = String(day).padStart(2,"0")
+    let currentDateISO = `${year}-${month_string}-${day_string}`
+    console.log(currentDateISO)
+    let dateElement = document.querySelector('#warrantyDate')
+    dateElement.value = currentDateISO
 }
-
-
-
+warrantyDateInputv2()
 
 const clearAllAlertAndData = ()=>{
     //清除產品警告
@@ -81,10 +98,6 @@ const clearAllAlertAndData = ()=>{
 }
 
 
-
-
-
-
 formElement.addEventListener('submit', (event) => {
     clearAllAlertAndData()
     event.preventDefault()
@@ -92,7 +105,7 @@ formElement.addEventListener('submit', (event) => {
     validateCodeFormat()
     checkRadionValue()
     warrantyCheck()
-    warrantyDateInput()
-    
+    // warrantyDateInput()
+    warrantyDateInputv2()
     console.log(allOfDataArray)
 })
