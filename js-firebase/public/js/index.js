@@ -72,6 +72,7 @@ const warrantyCheck = ()=>{
 const warrantyDateInputv2=()=>{
     
     let current = new Date();
+    console.log(current)
     let year = current.getFullYear()
     let month = current.getMonth()+1
     let day = current.getDate()
@@ -82,6 +83,7 @@ const warrantyDateInputv2=()=>{
     console.log(currentDateISO)
     let dateElement = document.querySelector('#warrantyDate')
     dateElement.value = currentDateISO
+    dateElement.min = currentDateISO
 }
 warrantyDateInputv2()
 
