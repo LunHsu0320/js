@@ -1,12 +1,7 @@
-// import { initializeApp } from "firebase/app";
-// import { initializeApp } from "../node_modules/firebase/app";
-
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js'
-// import { initializeApp } from '/js-firebase/node_modules/firebase/firebase-app.js'
 
 import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js'
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAQ_OmmFd7rpNiP3h-9hbJg4OCmtRfI4PM",
     authDomain: "js-firebase-da216.firebaseapp.com",
