@@ -4,16 +4,16 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js'
 // import { initializeApp } from '/js-firebase/node_modules/firebase/firebase-app.js'
 
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js'
+import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAQ_OmmFd7rpNiP3h-9hbJg4OCmtRfI4PM",
-  authDomain: "js-firebase-da216.firebaseapp.com",
-  projectId: "js-firebase-da216",
-  storageBucket: "js-firebase-da216.appspot.com",
-  messagingSenderId: "618826833406",
-  appId: "1:618826833406:web:b2821fada03fb390bb34af"
+    apiKey: "AIzaSyAQ_OmmFd7rpNiP3h-9hbJg4OCmtRfI4PM",
+    authDomain: "js-firebase-da216.firebaseapp.com",
+    projectId: "js-firebase-da216",
+    storageBucket: "js-firebase-da216.appspot.com",
+    messagingSenderId: "618826833406",
+    appId: "1:618826833406:web:b2821fada03fb390bb34af"
 };
 
 // Initialize Firebase
@@ -21,8 +21,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let formElement = document.querySelector('#form')
-let allOfDataArray = [];
-
+let allOfDataObject = {};
 
 //Name校驗
 const validateName = () => {
@@ -35,7 +34,8 @@ const validateName = () => {
         return
     }
     console.log(productName)
-    allOfDataArray.push({ 'productName': productName })
+    // allOfDataArray.push({ 'productName': productName })
+    allOfDataObject['productName'] = productName
 }
 
 
@@ -52,7 +52,8 @@ const validateCodeFormat = () => {
         codeAlertElement.classList.remove("close")
         return
     }
-    allOfDataArray.push({ 'code': inputCodeValue })
+    // allOfDataArray.push({ 'code': inputCodeValue })
+    allOfDataObject['code'] = inputCodeValue
 
 }
 
@@ -65,7 +66,8 @@ const checkRadionValue = () => {
         if (element.checked) {
             console.log(element)
             console.log(element.value)
-            allOfDataArray.push({ 'catgory': element.value })
+            // allOfDataArray.push({ 'catgory': element.value })
+            allOfDataObject['category'] = element.value
         }
     })
 }
@@ -74,9 +76,11 @@ const checkRadionValue = () => {
 const warrantyCheck = () => {
     let checkboxElement = document.querySelector('#warrantyCheck1')
     if (checkboxElement.checked) {
-        allOfDataArray.push({ 'warranty': true })
+        // allOfDataArray.push({ 'warranty': true })
+        allOfDataObject['warranty'] = true
     } else {
-        allOfDataArray.push({ 'warranty': false })
+        // allOfDataArray.push({ 'warranty': false })
+        allOfDataObject['warranty'] = false
     }
 }
 
@@ -111,7 +115,8 @@ warrantyDateInputv2()
 
 const getwarrantyDate = () => {
     let dateElement = document.querySelector('#warrantyDate')
-    allOfDataArray.push({ 'warrantyDate': dateElement.value })
+    // allOfDataArray.push({ 'warrantyDate': dateElement.value })
+    allOfDataObject['warrantyDate'] = dateElement.value
 }
 
 // const getwarrantyDategpt = () => {
@@ -127,24 +132,25 @@ const clearAllAlertAndData = () => {
     let codeAlertElement = document.querySelector('#codeAlert')
     codeAlertElement.classList.add("close")
     //清除收集的資料
-    allOfDataArray = []
+    // allOfDataArray = []
+    allOfDataObject = {}
 
 }
 
-const setEmpty=()=>{
+const setEmpty = () => {
     let inputNameElement = document.querySelector('#inputName')
     inputNameElement.value = ''
-    let inputCodeElement = document.querySelector('#inputCode')    
+    let inputCodeElement = document.querySelector('#inputCode')
     inputCodeElement.value = ''
     let radio1Element = document.querySelectorAll('#inlineRadio1')
     radio1Element.checked = true
     let checkboxElement = document.querySelector('#warrantyCheck1')
     checkboxElement.checked = false
-    warrantyDateInputv2()    
+    warrantyDateInputv2()
 }
 
 
-formElement.addEventListener('submit', (event) => {
+formElement.addEventListener('submit', async(event) => {
     clearAllAlertAndData()
     event.preventDefault()
     validateName()
@@ -154,7 +160,16 @@ formElement.addEventListener('submit', (event) => {
     // warrantyDateInput()
     // warrantyDateInputv2()
     getwarrantyDate()
+
     // getwarrantyDategpt()
-    console.log(allOfDataArray)
+    // console.log(allOfDataArray)
+    console.log(allOfDataObject)
+    try {
+        const docRef = await addDoc(collection(db, "products"),allOfDataObject) 
+
+        console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
     setEmpty()
 })
