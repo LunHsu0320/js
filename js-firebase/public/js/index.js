@@ -35,7 +35,7 @@ const validateCodeFormat=()=>{
 } 
 
 
-//擷取radio表單
+//radio表單check
 const checkRadionValue = ()=>{
     let radionElement = document.querySelectorAll('.form-check-input')
     console.log(radionElement)
@@ -48,6 +48,7 @@ const checkRadionValue = ()=>{
     })
 }
 
+//保固checkbox
 const warrantyCheck = ()=>{
     let checkboxElement = document.querySelector('#warrantyCheck1')
     if (checkboxElement.checked){
@@ -56,6 +57,16 @@ const warrantyCheck = ()=>{
         allOfDataArray.push({'warranty':false})    
     }
 }
+
+const warrantyDateInput=()=>{
+    let warrantyDateInput = document.getElementById('warrantyDate');
+    let warrantyDateValue = warrantyDateInput.value;    
+    console.log('選取的日期:', warrantyDateValue);
+    allOfDataArray.push({'選取的日期:': warrantyDateValue})
+}
+
+
+
 
 const clearAllAlertAndData = ()=>{
     //清除產品警告
@@ -72,6 +83,8 @@ const clearAllAlertAndData = ()=>{
 
 
 
+
+
 formElement.addEventListener('submit', (event) => {
     clearAllAlertAndData()
     event.preventDefault()
@@ -79,5 +92,7 @@ formElement.addEventListener('submit', (event) => {
     validateCodeFormat()
     checkRadionValue()
     warrantyCheck()
+    warrantyDateInput()
+    
     console.log(allOfDataArray)
 })
