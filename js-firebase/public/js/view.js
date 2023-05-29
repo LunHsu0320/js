@@ -19,10 +19,17 @@ let formElement = document.querySelector('#form')
 let allOfDataObject = {};
 
 const querySnapshot = await getDocs(collection(db, "products"));
+let contents = ""
 querySnapshot.forEach(doc => {
     console.log(doc.id)
+    
     let documentData = doc.data()
     console.log(documentData['productName'])
 
-//   console.log(`${doc.id} => ${doc.data()}`);
+    //   console.log(`${doc.id} => ${doc.data()}`);
+    contents += `<tr><th scope="row">${doc.id}</th><td>${documentData['productName']}</td><td>${documentData['code']}</td></tr>`
 });
+
+let tbodyElement = document.querySelector('#tbody')
+tbodyElement.innerHTML = contents
+
