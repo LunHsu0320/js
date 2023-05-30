@@ -8,29 +8,7 @@
     <title>產品</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
-    <script type="module">
-
-        let selectedElement = document.querySelector('#stockSelect')
-        fetch(new Request('codeSearch.json'))
-            .then((response) => {
-                return response.json()
-            }).then((r) => {
-                r.forEach(element => {
-                    let code = element.code
-                    let name = element.name
-                    let stockName = `${code}-${name}`
-                    let optionElement = document.createElement("option")
-                    //option 加上value
-                    optionElement.value = code                    
-                    //option 裡面文字使用stockName帶的值
-                    optionElement.innerText = stockName
-                    selectedElement.appendChild(optionElement)
-                });
-
-            })
-
-
-    </script>
+    <script type="module" src="js/stock.js"></script>
 </head>
 
 <body>
@@ -46,10 +24,21 @@
             </ul>
         </nav>
         <main class="main">
+            <form action="" method="post">
+                <div class="input-group mb-3">
             <select id="stockSelect" class="form-select" aria-label="Default select example">
                 <option selected>請選取股票名稱</option>
 
             </select>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupFile02">請選擇年月</label>
+            <input type="month" class="form-control" id="inputGroupFile02" min="2000-01">
+            
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
         </main>
         <footer class="footer">
             <h1>Footer</h1>
