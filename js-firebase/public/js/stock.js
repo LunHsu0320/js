@@ -10,7 +10,7 @@ fetch(new Request('codeSearch.json'))
             let stockName = `${code}-${name}`
             let optionElement = document.createElement("option")
             //option 加上value
-            optionElement.value = code                    
+            optionElement.value = code
             //option 裡面文字使用stockName帶的值
             optionElement.innerText = stockName
             selectedElement.appendChild(optionElement)
@@ -18,7 +18,12 @@ fetch(new Request('codeSearch.json'))
 
     })
 let fromElement = document.querySelector('form')
-fromElement.addEventListener('submit',(event) => {
-event.preventDefault()
-
+fromElement.addEventListener('submit', (event) => {
+    event.preventDefault()
+    let stockId = selectedElement.value
+    if (stockId.length > 4) {
+        return
+    }
+    console.log(stockId)
+    
 })
