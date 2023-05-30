@@ -8,8 +8,8 @@
 </head>
 <body>
     <script type="module">
-        let promiseObject = fetch(new Request('codeSearch.json'))
-        promiseObject.then((response)=>{
+        fetch(new Request('codeSearch.json'))
+        .then((response)=>{
             return response.json()
         }).then((r)=>{
             console.log(r)
